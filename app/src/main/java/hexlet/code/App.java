@@ -20,8 +20,12 @@ public class App implements Callable<Integer> {
     private String format;
 
     @Override
-    public Integer call() /*throws Exception*/ {
+    public Integer call() throws Exception {
         System.out.println("Hello World!");
+        var file1 = Differ.parseFile("file1.json");
+        var file2 = Differ.parseFile("file2.json");
+        System.out.println(file1.toString());
+        System.out.println(file2.toString());
         return 0;
     }
     public static void main(String[] args) {
