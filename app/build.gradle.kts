@@ -1,5 +1,6 @@
 plugins {
     application
+    checkstyle
     id("se.patrikerdes.use-latest-versions") version "0.2.18"
     id("com.github.ben-manes.versions") version "0.52.0"
 }
@@ -20,6 +21,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation ("info.picocli:picocli:4.7.7")
     implementation ("com.fasterxml.jackson.core:jackson-databind:2.19.0")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.test {

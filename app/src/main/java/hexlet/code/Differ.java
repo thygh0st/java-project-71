@@ -14,7 +14,7 @@ public class Differ {
     }
     public static SortedMap<String, String> parseFile(String filename) throws Exception { // TODO switch to private
         var mapper = new ObjectMapper();
-        return mapper.readValue(getFilePath(filename).toFile(), new TypeReference<SortedMap<String, String>>(){});
+        return mapper.readValue(getFilePath(filename).toFile(), new TypeReference<SortedMap<String, String>>() { });
     }
 
     // метод формирования строки для вывода и удаление из мапы | UPD не добавил удаление из мапы, т.к. side effect
@@ -38,7 +38,8 @@ public class Differ {
             var f1TopVal = mappedFile1.get(f1TopKey).trim();
             var f2TopVal = mappedFile2.get(f2TopKey).trim();
 
-            int firstCharFlag = Character.compare(f1TopKey.charAt(0), f2TopKey.charAt(0)); // сравниваем первые буквы первого ключа
+            // сравниваем первые буквы первого ключа
+            int firstCharFlag = Character.compare(f1TopKey.charAt(0), f2TopKey.charAt(0));
 
             if (firstCharFlag < 0) { // второй ключ начинается с большей буквы (дальше по алфавиту)
                 resultStr.append(entryHandler(f1TopKey, f1TopVal, "-"));
@@ -48,7 +49,8 @@ public class Differ {
                 mappedFile2.remove(f2TopKey);
             } else if (firstCharFlag == 0) { // буквы совпадают
                 if (f1TopKey.equals(f2TopKey)) { // если ключи одинаковые
-                    if (f1TopVal.equals(f2TopVal)) { // если значения совпадают, добавляем строку без знака, но с отступом
+                    if (f1TopVal.equals(f2TopVal)) {
+                        // если значения совпадают, добавляем строку без знака, но с отступом
                         resultStr.append(entryHandler(f1TopKey, f1TopVal, " "));
                     } else {
                         resultStr.append(entryHandler(f1TopKey, f1TopVal, "-"));
