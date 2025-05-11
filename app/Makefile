@@ -3,9 +3,9 @@ build-dist:
 	./gradlew installDist
 lint:
 	./gradlew checkstyleMain
-build: build-dist lint
 test:
 	./gradlew test
+build: build-dist lint test
 
 run:
 	./build/install/app/bin/app
