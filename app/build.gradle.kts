@@ -6,6 +6,14 @@ plugins {
     id("com.github.ben-manes.versions") version "0.52.0"
 }
 
+sonar {
+    properties {
+        property("sonar.projectKey", "thygh0st_java-project-71")
+        property("sonar.organization", "thygh0st")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
+}
+
 application {
     mainClass = "hexlet.code.App"
 }
@@ -27,12 +35,4 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
-}
-
-sonar {
-    properties {
-        property("sonar.projectKey", "thygh0st_java-project-71")
-        property("sonar.organization", "thygh0st")
-        property("sonar.host.url", "https://sonarcloud.io")
-    }
 }
