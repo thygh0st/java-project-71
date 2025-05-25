@@ -1,4 +1,4 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import hexlet.code.Differ;
@@ -6,38 +6,37 @@ import hexlet.code.Differ;
 // TODO обработка исключений
 // TODO тест с полем-подстрокой другого поля
 public class DifferTest {
-    @Test
-    public void testBothEmpty() throws Exception {
+    public void bothEmpty(String file1, String file2) throws Exception {
         String expected = "";
-        assertEquals(expected, Differ.generate("empty.json", "empty.json"));
+        assertEquals(expected, Differ.generate(file1, file2));
     }
-    @Test
-    public void testLeftEmpty() throws Exception {
+    public void leftEmpty(String file1, String file2) throws Exception {
         // https://blogs.oracle.com/javamagazine/post/text-blocks-come-to-java (Incidental White Space and Indentation)
         String expected = """
-        \n{
+
+        {
           + follow: false
           + host: hexlet.io
           + proxy: 123.234.53.22
           + timeout: 50
         }""";
-        assertEquals(expected, Differ.generate("empty.json", "file1.json"));
+        assertEquals(expected, Differ.generate(file1, file2));
     }
-    @Test
-    public void testRightEmpty() throws Exception {
+    public void rightEmpty(String file1, String file2) throws Exception {
         String expected = """
-        \n{
+
+        {
           - follow: false
           - host: hexlet.io
           - proxy: 123.234.53.22
           - timeout: 50
         }""";
-        assertEquals(expected, Differ.generate("file1.json", "empty.json"));
+        assertEquals(expected, Differ.generate(file1, file2));
     }
-    @Test
-    public void testExample() throws Exception {
+    public void example(String file1, String file2) throws Exception {
         String expected = """
-        \n{
+
+        {
           - follow: false
             host: hexlet.io
           - proxy: 123.234.53.22
@@ -45,6 +44,39 @@ public class DifferTest {
           + timeout: 20
           + verbose: true
         }""";
-        assertEquals(expected, Differ.generate("file1.json", "file2.json"));
+        assertEquals(expected, Differ.generate(file1, file2));
+    }
+
+    @Test
+    public void testEmptyJson() throws Exception {
+        bothEmpty("empty.json", "empty.json");
+    }
+    @Test
+    public void testEmptyYaml() throws Exception {
+        bothEmpty("empty.yml", "empty.yml");
+    }
+    @Test
+    public void testLeftEmptyJson() throws Exception {
+        leftEmpty("empty.json", "file1.json");
+    }
+    @Test
+    public void testLeftEmptyYaml() throws Exception {
+        leftEmpty("empty.yml", "file1.yml");
+    }
+    @Test
+    public void testRightEmptyJson() throws Exception {
+        rightEmpty("file1.json", "empty.json");
+    }
+    @Test
+    public void testRightEmptyYaml() throws Exception {
+        rightEmpty("file1.yml", "empty.yml");
+    }
+    @Test
+    public void testExampleJson() throws Exception {
+        example("file1.json", "file2.json");
+    }
+    @Test
+    public void testExampleYaml() throws Exception {
+        example("file1.yml", "file2.yml");
     }
 }

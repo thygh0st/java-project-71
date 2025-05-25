@@ -10,8 +10,8 @@ public class Differ {
     }
 
     public static String generate(String filename1, String filename2) throws Exception {
-        var mappedFile1 = Utils.parseFile(filename1);
-        var mappedFile2 = Utils.parseFile(filename2);
+        var mappedFile1 = Parcer.parseFile(filename1);
+        var mappedFile2 = Parcer.parseFile(filename2);
 //        ArrayList<String> resultList = new ArrayList<>();
         StringBuilder resultStr = new StringBuilder("\n{");
 
