@@ -5,4 +5,5 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=thygh0st_java-project-71&metric=coverage)](https://sonarcloud.io/summary/new_code?id=thygh0st_java-project-71)
 
 ### Демонстрация
-#### [Первая версия](https://asciinema.org/a/1IcSqRFl7Y8EcYhM2mJvyJvWU "Open asciinema demo generate()")
+#### [Сравнение JSON](https://asciinema.org/a/1IcSqRFl7Y8EcYhM2mJvyJvWU "Open asciinema demo generate()")
+#### [Сравнение YAML](https://asciinema.org/a/lwCWBFLH0kLO5ayl3QjoMgJVD "Open asciinema demo generate()")
