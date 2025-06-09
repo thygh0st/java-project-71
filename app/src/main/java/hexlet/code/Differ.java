@@ -22,17 +22,15 @@ public class Differ {
             // уровне вложенности." -> буду сравнивать, как String
             var value1 = mappedFile1.get(key);
             var value2 = mappedFile2.get(key);
-            String value2Str = String.valueOf(value2); // toString() не работает на null!
-            String value1Str = String.valueOf(value1);
             if (!mappedFile1.containsKey(key)) {
-                resultList.add(new DiffDTO(key, value2Str, Utils.Status.ADDED));
+                resultList.add(new DiffDTO(key, value2, Utils.Status.ADDED));
             } else if (!mappedFile2.containsKey(key)) {
-                resultList.add(new DiffDTO(key, value1Str, Utils.Status.REMOVED));
+                resultList.add(new DiffDTO(key, value1, Utils.Status.REMOVED));
             } else {
-                if (value1Str.compareTo(value2Str) == 0) {
-                    resultList.add(new DiffDTO(key, value2Str, Utils.Status.EQUAL));
+                if (String.valueOf(value1).compareTo(String.valueOf(value2)) == 0) {
+                    resultList.add(new DiffDTO(key, value2, Utils.Status.EQUAL));
                 } else {
-                    resultList.add(new DiffDTO(key, value1Str, Utils.Status.CHANGED, value2Str));
+                    resultList.add(new DiffDTO(key, value1, Utils.Status.CHANGED, value2));
                 }
             }
         }

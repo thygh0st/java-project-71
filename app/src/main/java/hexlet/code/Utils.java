@@ -1,7 +1,7 @@
 package hexlet.code;
 
 public class Utils {
-    enum Status {
+    public enum Status {
         ADDED,
         REMOVED,
         CHANGED,
