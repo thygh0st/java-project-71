@@ -22,7 +22,7 @@ public class Parcer {
         if (filename.endsWith("yml")) {
             return new YAMLMapper();
         } else if (filename.endsWith("json")) {
-            return new ObjectMapper();
+            return new ObjectMapper(); // FAIL_ON_NULL_FOR_PRIMITIVES ?
         } else {
             return null;
         }
