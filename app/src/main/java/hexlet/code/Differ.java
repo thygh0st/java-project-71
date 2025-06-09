@@ -1,73 +1,53 @@
 package hexlet.code;
 
-//import java.util.SortedMap;
+import java.util.ArrayList;
+import java.util.TreeSet;
 
+import static hexlet.code.Formatter.genOutput;
 
 public class Differ {
-    // метод формирования строки для вывода и удаление из мапы | UPD не добавил удаление из мапы, т.к. side effect
-    private static String entryFormatter(String key, String value, String sign) {
-        return ("\n  " + sign + " " + key + ": " + value);
-    }
-
-    public static String generate(String filename1, String filename2) throws Exception {
+    public static ArrayList<DiffDTO> getDiff(String filename1, String filename2) throws Exception {
         var mappedFile1 = Parcer.parseFile(filename1);
         var mappedFile2 = Parcer.parseFile(filename2);
-//        ArrayList<String> resultList = new ArrayList<>();
-        StringBuilder resultStr = new StringBuilder("\n{");
+        ArrayList<DiffDTO> resultList = new ArrayList<>();
+        TreeSet<String> keysCombined = new TreeSet<>(mappedFile1.keySet());
+        keysCombined.addAll(mappedFile2.keySet());
 
-        if ((mappedFile1.isEmpty()) && (mappedFile2.isEmpty())) {
-            return "";
+        if (keysCombined.isEmpty()) {
+            return null;
         }
-
-        while ((!mappedFile1.isEmpty()) && (!mappedFile2.isEmpty())) {
-            var f1TopKey = mappedFile1.firstKey().trim().toLowerCase();
-            var f2TopKey = mappedFile2.firstKey().trim().toLowerCase();
-            var f1TopVal = mappedFile1.get(f1TopKey).trim();
-            var f2TopVal = mappedFile2.get(f2TopKey).trim();
-
-            // сравниваем первые буквы первого ключа
-            int firstCharFlag = Character.compare(f1TopKey.charAt(0), f2TopKey.charAt(0));
-
-            if (firstCharFlag < 0) { // второй ключ начинается с большей буквы (дальше по алфавиту)
-                resultStr.append(entryFormatter(f1TopKey, f1TopVal, "-"));
-                mappedFile1.remove(f1TopKey);
-            } else if (firstCharFlag > 0) { // первый ключ начинается с большей буквы (дальше по алфавиту)
-                resultStr.append(entryFormatter(f2TopKey, f2TopVal, "+"));
-                mappedFile2.remove(f2TopKey);
-            } else { // буквы совпадают
-                if (f1TopKey.equals(f2TopKey)) { // если ключи одинаковые
-                    if (f1TopVal.equals(f2TopVal)) {
-                        // если значения совпадают, добавляем строку без знака, но с отступом
-                        resultStr.append(entryFormatter(f1TopKey, f1TopVal, " "));
-                    } else {
-                        resultStr.append(entryFormatter(f1TopKey, f1TopVal, "-"));
-                        resultStr.append(entryFormatter(f2TopKey, f2TopVal, "+"));
-                    }
-                    mappedFile1.remove(f1TopKey);
-                    mappedFile2.remove(f2TopKey);
-                } /* else { // TODO добавить проверку на substring
-                } */
+        for (var key : keysCombined) {
+            // не уверен, что при парсинге одинаковых значений-массивов они будут храниться в памяти как один объект
+            // + из условия "В рамках данного проекта нужно будет анализировать значения ключей только на первом
+            // уровне вложенности." -> буду сравнивать, как String
+            var value1 = mappedFile1.get(key);
+            var value2 = mappedFile2.get(key);
+            String value2Str = String.valueOf(value2); // toString() не работает на null!
+            String value1Str = String.valueOf(value1);
+            if (!mappedFile1.containsKey(key)) {
+                resultList.add(new DiffDTO(key, value2Str, Utils.Status.ADDED));
+            } else if (!mappedFile2.containsKey(key)) {
+                resultList.add(new DiffDTO(key, value1Str, Utils.Status.REMOVED));
+            } else {
+                if (value1Str.compareTo(value2Str) == 0) {
+                    resultList.add(new DiffDTO(key, value2Str, Utils.Status.EQUAL));
+                } else {
+                    resultList.add(new DiffDTO(key, value1Str, Utils.Status.CHANGED, value2Str));
+                }
             }
         }
+//        }
+        return resultList;
+    }
 
-        if (!mappedFile1.isEmpty()) {
-            while (!mappedFile1.isEmpty()) {
-                var topKey = mappedFile1.firstKey().trim().toLowerCase();
-                var topVal = mappedFile1.get(topKey).trim();
-                resultStr.append(entryFormatter(topKey, topVal, "-"));
-                mappedFile1.remove(topKey);
-            }
-        }
-        if (!mappedFile2.isEmpty()) {
-            while (!mappedFile2.isEmpty()) {
-                var topKey = mappedFile2.firstKey().trim().toLowerCase();
-                var topVal = mappedFile2.get(topKey).trim();
-                resultStr.append(entryFormatter(topKey, topVal, "+"));
-                mappedFile2.remove(topKey);
-            }
-        }
-
-        resultStr.append("\n}");
-        return resultStr.toString();
+    public static String generate(String filename1, String filename2, String format) throws Exception {
+        var diff = getDiff(filename1, filename2);
+        var res = genOutput(diff, format);
+        return res;
+    }
+    public static String generate(String filename1, String filename2) throws Exception {
+        var diff = getDiff(filename1, filename2);
+        var res = genOutput(diff, "stylish");
+        return res;
     }
 }

@@ -37,12 +37,29 @@ public class DifferTest {
         String expected = """
 
         {
-          - follow: false
-            host: hexlet.io
-          - proxy: 123.234.53.22
-          - timeout: 50
-          + timeout: 20
-          + verbose: true
+            chars1: [a, b, c]
+          - chars2: [d, e, f]
+          + chars2: false
+          - checked: false
+          + checked: true
+          - default: null
+          + default: [value1, value2]
+          - id: 45
+          + id: null
+          - key1: value1
+          + key2: value2
+            numbers1: [1, 2, 3, 4]
+          - numbers2: [2, 3, 4, 5]
+          + numbers2: [22, 33, 44, 55]
+          - numbers3: [3, 4, 5]
+          + numbers4: [4, 5, 6]
+          + obj1: {nestedKey=value, isNested=true}
+          - setting1: Some value
+          + setting1: Another value
+          - setting2: 200
+          + setting2: 300
+          - setting3: true
+          + setting3: none
         }""";
         assertEquals(expected, Differ.generate(file1, file2));
     }
@@ -57,19 +74,19 @@ public class DifferTest {
     }
     @Test
     public void testLeftEmptyJson() throws Exception {
-        leftEmpty("empty.json", "file1.json");
+        leftEmpty("empty.json", "flat.json");
     }
     @Test
     public void testLeftEmptyYaml() throws Exception {
-        leftEmpty("empty.yml", "file1.yml");
+        leftEmpty("empty.yml", "flat.yml");
     }
     @Test
     public void testRightEmptyJson() throws Exception {
-        rightEmpty("file1.json", "empty.json");
+        rightEmpty("flat.json", "empty.json");
     }
     @Test
     public void testRightEmptyYaml() throws Exception {
-        rightEmpty("file1.yml", "empty.yml");
+        rightEmpty("flat.yml", "empty.yml");
     }
     @Test
     public void testExampleJson() throws Exception {

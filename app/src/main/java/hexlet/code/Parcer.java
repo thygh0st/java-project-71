@@ -1,12 +1,13 @@
 package hexlet.code;
 
+//import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.SortedMap;
+import java.util.Map;
 
 public class Parcer {
     private static Path getFilePath(String filename) {
@@ -26,14 +27,13 @@ public class Parcer {
             return null;
         }
     }
-    public static SortedMap<String, String> parseFile(String filename) throws Exception {
+    public static Map<String, Object> parseFile(String filename) throws Exception {
         ObjectMapper mapper = getMapper(filename);
         if (mapper != null) {
             return mapper.readValue(
-                    getFilePath(filename).toFile(), new TypeReference<SortedMap<String, String>>() { }
-            );
+                    getFilePath(filename).toFile(), new TypeReference<Map<String, Object>>() { });
         } else {
-            throw new Exception("Mapper is null!");
+            throw new Exception("Mapper is null! Bad file extension?");
         }
     }
 }
