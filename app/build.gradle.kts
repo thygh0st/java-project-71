@@ -4,6 +4,7 @@ plugins {
     id("org.sonarqube") version "6.0.1.5171"
     id("se.patrikerdes.use-latest-versions") version "0.2.18"
     id("com.github.ben-manes.versions") version "0.52.0"
+    jacoco
 }
 
 sonar {
@@ -11,6 +12,7 @@ sonar {
         property("sonar.projectKey", "thygh0st_java-project-71")
         property("sonar.organization", "thygh0st")
         property("sonar.host.url", "https://sonarcloud.io")
+        property ("sonar.coverage.jacoco.xmlReportPaths", "/reports/jacoco/test/jacocoTestReport.xml")
     }
 }
 
@@ -36,4 +38,16 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
+    }
 }
