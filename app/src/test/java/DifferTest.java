@@ -5,7 +5,7 @@ import hexlet.code.Differ;
 
 // TODO обработка исключений
 // TODO проверка абсолютного пути до файла
-public class DifferTest {
+public final class DifferTest {
     public void bothEmpty(String file1, String file2) throws Exception {
         String expected = "";
         assertEquals(expected, Differ.generate(file1, file2));
@@ -17,8 +17,7 @@ public class DifferTest {
           + follow: false
           + host: hexlet.io
           + proxy: 123.234.53.22
-          + timeout: 50
-        }""";
+          + timeout: 50\n}""";
         assertEquals(expected, Differ.generate(file1, file2));
     }
     public void rightEmpty(String file1, String file2) throws Exception {
@@ -27,8 +26,7 @@ public class DifferTest {
           - follow: false
           - host: hexlet.io
           - proxy: 123.234.53.22
-          - timeout: 50
-        }""";
+          - timeout: 50\n}""";
         assertEquals(expected, Differ.generate(file1, file2));
     }
     public void example(String file1, String file2) throws Exception {
@@ -56,8 +54,7 @@ public class DifferTest {
           - setting2: 200
           + setting2: 300
           - setting3: true
-          + setting3: none
-        }""";
+          + setting3: none\n}""";
         assertEquals(expected, Differ.generate(file1, file2));
     }
     public void examplePlain(String file1, String file2, String format) throws Exception {

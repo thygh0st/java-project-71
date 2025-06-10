@@ -1,6 +1,6 @@
 package hexlet.code;
 
-public class DiffDTO {
+public final class DiffDTO {
     private String key;
     private Object value; // при статусе CHANGED хранит левое значение
     private Utils.Status status;
