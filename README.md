@@ -14,7 +14,14 @@
 - Генерация отчета в виде plain text, stylish и json
 
 Описание доступных опций и формата вызова можно получить по `--help`
- 
+
+### Сборка и запуск
+```shell
+cd ./app
+make build-dist
+./build/install/app/bin/app --version
+```
+
 ### Демонстрация
-#### [Сравнение JSON](https://asciinema.org/a/e6hhiUFB0kuCIrLpJfOIsPv37 "Open asciinema demo generate()")
-#### [Сравнение YAML](https://asciinema.org/a/lOe3Vn6pfZiR9xhj8VYGk49Os "Open asciinema demo generate()")
+#### [Сравнение JSON](https://asciinema.org/a/JUC4NIxytz8kP8h1zG9YjJET2 "Open asciinema demo generate()")
+#### [Сравнение YAML](https://asciinema.org/a/zCXOoxEw2OxxNul2RelHhGUxQ "Open asciinema demo generate()")

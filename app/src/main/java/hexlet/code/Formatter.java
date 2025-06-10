@@ -15,7 +15,6 @@ public class Formatter {
                 break;
             case "json":
                 res = Json.genOutput(diff);
-                System.out.println(res);
                 break;
             default:
                 res = Stylish.genOutput(diff);
