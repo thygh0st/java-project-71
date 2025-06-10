@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import hexlet.code.Differ;
 
 // TODO обработка исключений
-// TODO тест с полем-подстрокой другого поля
+// TODO проверка абсолютного пути до файла
 public class DifferTest {
     public void bothEmpty(String file1, String file2) throws Exception {
         String expected = "";
@@ -62,7 +62,6 @@ public class DifferTest {
     }
     public void examplePlain(String file1, String file2, String format) throws Exception {
         String expected = """
-
             Property 'chars2' was updated. From [complex value] to false
             Property 'checked' was updated. From false to true
             Property 'default' was updated. From null to [complex value]

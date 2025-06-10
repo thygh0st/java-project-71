@@ -48,6 +48,6 @@ public class Plain {
                     throw new Exception("Unknown entry status!");
             }
         }
-        return resultStr.toString();
+        return resultStr.toString().trim();
     }
 }
