@@ -13,7 +13,6 @@ public class DifferTest {
     public void leftEmpty(String file1, String file2) throws Exception {
         // https://blogs.oracle.com/javamagazine/post/text-blocks-come-to-java (Incidental White Space and Indentation)
         String expected = """
-
         {
           + follow: false
           + host: hexlet.io
@@ -24,7 +23,6 @@ public class DifferTest {
     }
     public void rightEmpty(String file1, String file2) throws Exception {
         String expected = """
-
         {
           - follow: false
           - host: hexlet.io
@@ -35,7 +33,6 @@ public class DifferTest {
     }
     public void example(String file1, String file2) throws Exception {
         String expected = """
-
         {
             chars1: [a, b, c]
           - chars2: [d, e, f]

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Stylish {
     public static String genOutput(ArrayList<DiffDTO> diff) throws Exception {
-        StringBuilder resultStr = new StringBuilder("\n{");
+        StringBuilder resultStr = new StringBuilder("{");
         String operator = "";
 
         // пустая структура
