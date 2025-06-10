@@ -19,7 +19,7 @@ public class Parcer {
         }
     }
     private static ObjectMapper getMapper(String filename) {
-        if (filename.endsWith("yml")) {
+        if (filename.endsWith("yml") || filename.endsWith("yaml")) {
             return new YAMLMapper();
         } else if (filename.endsWith("json")) {
             return new ObjectMapper(); // FAIL_ON_NULL_FOR_PRIMITIVES ?

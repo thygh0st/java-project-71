@@ -7,7 +7,7 @@ import picocli.CommandLine.Parameters;
 
 import java.util.concurrent.Callable;
 
-@Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 0.1",
+@Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
         description = "Compares two configuration files and shows a difference.")
 public class App implements Callable<Integer> {
     @Parameters(index = "0", description = "path to first file")
@@ -16,7 +16,7 @@ public class App implements Callable<Integer> {
     private String filepath2;
 
     @Option(names = {"-f", "--format"}, defaultValue = "stylish",
-            description = "output format {plain, stylish} [default: ${DEFAULT-VALUE}]")
+            description = "output format {plain, stylish, json} [default: ${DEFAULT-VALUE}]")
     private String format;
 
     @Override
