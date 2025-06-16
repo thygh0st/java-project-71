@@ -1,7 +1,7 @@
 package hexlet.code.formatters;
 
 import hexlet.code.DiffDTO;
-import hexlet.code.Utils;
+import hexlet.code.Status;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class Stylish {
                     throw new Exception("Unknown entry status!");
             }
             resultStr.append("\n  " + operator + entry.getKey() + ": " + entry.getValue());
-            if (entry.getStatus() == Utils.Status.CHANGED) {
+            if (entry.getStatus() == Status.CHANGED) {
                 resultStr.append("\n  " + "+ " + entry.getKey() + ": " + entry.getSecondValue());
             }
         }

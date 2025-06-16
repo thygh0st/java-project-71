@@ -7,8 +7,8 @@ import static hexlet.code.Formatter.genOutput;
 
 public class Differ {
     public static ArrayList<DiffDTO> getDiff(String filename1, String filename2) throws Exception {
-        var mappedFile1 = Parcer.parseFile(filename1);
-        var mappedFile2 = Parcer.parseFile(filename2);
+        var mappedFile1 = Parser.parseFile(filename1);
+        var mappedFile2 = Parser.parseFile(filename2);
         ArrayList<DiffDTO> resultList = new ArrayList<>();
         TreeSet<String> keysCombined = new TreeSet<>(mappedFile1.keySet());
         keysCombined.addAll(mappedFile2.keySet());
@@ -23,18 +23,15 @@ public class Differ {
             var value1 = mappedFile1.get(key);
             var value2 = mappedFile2.get(key);
             if (!mappedFile1.containsKey(key)) {
-                resultList.add(new DiffDTO(key, value2, Utils.Status.ADDED));
+                resultList.add(new DiffDTO(key, value2, Status.ADDED));
             } else if (!mappedFile2.containsKey(key)) {
-                resultList.add(new DiffDTO(key, value1, Utils.Status.REMOVED));
+                resultList.add(new DiffDTO(key, value1, Status.REMOVED));
+            } else if (String.valueOf(value1).compareTo(String.valueOf(value2)) == 0) {
+                resultList.add(new DiffDTO(key, value2, Status.EQUAL));
             } else {
-                if (String.valueOf(value1).compareTo(String.valueOf(value2)) == 0) {
-                    resultList.add(new DiffDTO(key, value2, Utils.Status.EQUAL));
-                } else {
-                    resultList.add(new DiffDTO(key, value1, Utils.Status.CHANGED, value2));
-                }
+                resultList.add(new DiffDTO(key, value1, Status.CHANGED, value2));
             }
         }
-//        }
         return resultList;
     }
 

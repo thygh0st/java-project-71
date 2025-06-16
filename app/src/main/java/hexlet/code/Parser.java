@@ -1,6 +1,5 @@
 package hexlet.code;
 
-//import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
@@ -9,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
-public class Parcer {
+public class Parser {
     private static Path getFilePath(String filename) {
         if (Paths.get(filename).isAbsolute()) {
             return Paths.get(filename).normalize();

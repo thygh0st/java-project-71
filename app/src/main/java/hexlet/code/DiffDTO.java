@@ -3,16 +3,16 @@ package hexlet.code;
 public final class DiffDTO {
     private String key;
     private Object value; // при статусе CHANGED хранит левое значение
-    private Utils.Status status;
+    private Status status;
     private Object secondValue; // используется только при статусе CHANGED; хранит правое значение
 
-    DiffDTO(String key, Object value, Utils.Status status) {
+    DiffDTO(String key, Object value, Status status) {
         setKey(key);
         setValue(value);
         setStatus(status);
         setSecondValue(null);
     }
-    DiffDTO(String key, Object value, Utils.Status status, Object secondValue) {
+    DiffDTO(String key, Object value, Status status, Object secondValue) {
         setKey(key);
         setValue(value);
         setStatus(status);
@@ -25,7 +25,7 @@ public final class DiffDTO {
     public void setValue(Object value) {
         this.value = value;
     }
-    public void setStatus(Utils.Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
     public void setSecondValue(Object secondValue) {
@@ -38,7 +38,7 @@ public final class DiffDTO {
     public Object getValue() {
         return this.value;
     }
-    public Utils.Status getStatus() {
+    public Status getStatus() {
         return this.status;
     }
     public Object getSecondValue() {

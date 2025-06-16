@@ -16,9 +16,11 @@ public class Formatter {
             case "json":
                 res = Json.genOutput(diff);
                 break;
-            default:
+            case "stylish":
                 res = Stylish.genOutput(diff);
                 break;
+            default:
+                throw new Exception("Unknown format: " + format);
         }
         return res;
     }
