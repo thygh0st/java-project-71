@@ -3,10 +3,10 @@ package hexlet.code.formatters;
 import hexlet.code.DiffDTO;
 import hexlet.code.Status;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Stylish {
-    public static String genOutput(ArrayList<DiffDTO> diff) throws Exception {
+    public static String genOutput(List<DiffDTO> diff) throws Exception {
         StringBuilder resultStr = new StringBuilder("{");
         String operator = "";
 

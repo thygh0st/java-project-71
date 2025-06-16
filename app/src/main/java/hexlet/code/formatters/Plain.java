@@ -2,7 +2,7 @@ package hexlet.code.formatters;
 
 import hexlet.code.DiffDTO;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Plain {
     private static String valueFormatter(Object value) {
@@ -17,7 +17,7 @@ public class Plain {
         return "[complex value]";
     }
 
-    public static String genOutput(ArrayList<DiffDTO> diff) throws Exception {
+    public static String genOutput(List<DiffDTO> diff) throws Exception {
         StringBuilder resultStr = new StringBuilder();
 
         if (diff == null) {

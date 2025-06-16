@@ -1,38 +1,16 @@
 package hexlet.code;
 
-import java.util.ArrayList;
-import java.util.TreeSet;
+import java.util.List;
 
+import static hexlet.code.DiffCalc.calcDifference;
 import static hexlet.code.Formatter.genOutput;
 
 public class Differ {
-    public static ArrayList<DiffDTO> getDiff(String filename1, String filename2) throws Exception {
+    public static List<DiffDTO> getDiff(String filename1, String filename2) throws Exception {
         var mappedFile1 = Parser.parseFile(filename1);
         var mappedFile2 = Parser.parseFile(filename2);
-        ArrayList<DiffDTO> resultList = new ArrayList<>();
-        TreeSet<String> keysCombined = new TreeSet<>(mappedFile1.keySet());
-        keysCombined.addAll(mappedFile2.keySet());
 
-        if (keysCombined.isEmpty()) {
-            return null;
-        }
-        for (var key : keysCombined) {
-            // не уверен, что при парсинге одинаковых значений-массивов они будут храниться в памяти как один объект
-            // + из условия "В рамках данного проекта нужно будет анализировать значения ключей только на первом
-            // уровне вложенности." -> буду сравнивать, как String
-            var value1 = mappedFile1.get(key);
-            var value2 = mappedFile2.get(key);
-            if (!mappedFile1.containsKey(key)) {
-                resultList.add(new DiffDTO(key, value2, Status.ADDED));
-            } else if (!mappedFile2.containsKey(key)) {
-                resultList.add(new DiffDTO(key, value1, Status.REMOVED));
-            } else if (String.valueOf(value1).compareTo(String.valueOf(value2)) == 0) {
-                resultList.add(new DiffDTO(key, value2, Status.EQUAL));
-            } else {
-                resultList.add(new DiffDTO(key, value1, Status.CHANGED, value2));
-            }
-        }
-        return resultList;
+        return calcDifference(mappedFile1, mappedFile2);
     }
 
     public static String generate(String filename1, String filename2, String format) throws Exception {

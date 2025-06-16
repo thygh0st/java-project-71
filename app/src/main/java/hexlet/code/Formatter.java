@@ -4,10 +4,10 @@ import hexlet.code.formatters.Json;
 import hexlet.code.formatters.Plain;
 import hexlet.code.formatters.Stylish;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Formatter {
-    public static String genOutput(ArrayList<DiffDTO> diff, String format) throws Exception {
+    public static String genOutput(List<DiffDTO> diff, String format) throws Exception {
         String res;
         switch (format) {
             case "plain" :
