@@ -2,19 +2,27 @@ package hexlet.code.formatters;
 
 import hexlet.code.DiffDTO;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Plain {
     private static String valueFormatter(Object value) {
-        if ((value == null)
-            || (value.getClass().getSuperclass() == Number.class)
-            || (value.getClass() == Boolean.class)) {
+//        if ((value == null)
+//            || (value.getClass().getSuperclass() == Number.class)
+//            || (value.getClass() == Boolean.class)) {
+//            return String.valueOf(value);
+//        }
+        if (value == null) {
             return String.valueOf(value);
+        }
+        if (value.getClass().equals(ArrayList.class) || value.getClass().equals(LinkedHashMap.class)) {
+            return "[complex value]";
         }
         if (value.getClass().equals(String.class)) {
             return "'" + value + "'";
         }
-        return "[complex value]";
+        return value.toString();
     }
 
     public static String genOutput(List<DiffDTO> diff) throws Exception {
