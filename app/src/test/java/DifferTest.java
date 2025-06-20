@@ -1,5 +1,4 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.Test;
 
 import hexlet.code.Differ;
 import org.junit.jupiter.params.ParameterizedTest;
