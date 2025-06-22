@@ -1,8 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,15 +18,6 @@ public class Differ {
                     .toAbsolutePath().normalize();
         }
     }
-    private static ObjectMapper getMapper(String filename)  throws Exception {
-        if (filename.endsWith("yml") || filename.endsWith("yaml")) {
-            return new YAMLMapper();
-        } else if (filename.endsWith("json")) {
-            return new ObjectMapper(); // FAIL_ON_NULL_FOR_PRIMITIVES ?
-        } else {
-            throw new Exception("Unknown file extension");
-        }
-    }
     private static String getText(String filename) throws IOException {
         var path = getFilePath(filename);
         return Files.readString(path).trim();
@@ -38,8 +26,10 @@ public class Differ {
     public static List<DiffDTO> getDiff(String filename1, String filename2) throws Exception {
         var text1 = getText(filename1);
         var text2 = getText(filename2);
-        var mappedFile1 = Parser.parseMap(getMapper(filename1), text1);
-        var mappedFile2 = Parser.parseMap(getMapper(filename2), text2);
+        var splitFilename1 = filename1.split("\\.");
+        var splitFilename2 = filename2.split("\\.");
+        var mappedFile1 = Parser.parseMap(text1, splitFilename1[splitFilename1.length - 1]);
+        var mappedFile2 = Parser.parseMap(text2, splitFilename2[splitFilename2.length - 1]);
 
         return calcDifference(mappedFile1, mappedFile2);
     }
